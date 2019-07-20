@@ -34,14 +34,14 @@
                             <Button x:Name="UnmanagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top"/>
                         </StackPanel>
                         <Grid Height="100">
-                            <GroupBox Header="Bitness" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="100" Margin="0,11,0,-1">
+                            <GroupBox Header="Bitness" HorizontalAlignment="Left" Height="99" VerticalAlignment="Top" Width="100" Margin="0,11,0,-10">
                                 <Grid>
                                     <RadioButton GroupName="UnmanagedBitness" Content="32 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,6,0,0"/>
                                     <RadioButton GroupName="UnmanagedBitness" Content="64 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,30,0,0" RenderTransformOrigin="0.806,-0.278"/>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox Header="Output" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="354" Margin="105,11,0,0"/>
-                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,115,141,-41"/>
+                            <GroupBox Header="Output" HorizontalAlignment="Left" Height="99" VerticalAlignment="Top" Width="354" Margin="105,11,0,-10"/>
+                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,119,141,-45"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
@@ -53,13 +53,13 @@
                                 <Label Content="Target:" Width="76"/>
                                 <TextBox x:Name="ManagedTargetTextBox" TextWrapping="Wrap" Width="150"/>
                                 <Label Content="Namespace:" Width="85"/>
-                                <TextBox x:Name="f" TextWrapping="Wrap" Width="147" IsReadOnly="True"/>
+                                <TextBox x:Name="NamespaceTextBox" TextWrapping="Wrap" Width="147"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="Classname:" Width="76"/>
-                                <TextBox x:Name="sf" TextWrapping="Wrap" Width="150" IsReadOnly="True"/>
+                                <TextBox x:Name="ClassnameTextBox" TextWrapping="Wrap" Width="150"/>
                                 <Label Content="Methodname:" Width="85"/>
-                                <TextBox x:Name="sfd" TextWrapping="Wrap" Width="147" IsReadOnly="True"/>
+                                <TextBox x:Name="MethodTextBox" TextWrapping="Wrap" Width="147"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="DLL Path:" Width="76"/>
@@ -67,8 +67,8 @@
                                 <Button x:Name="ManagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top"/>
                             </StackPanel>
                             <Grid Height="93">
-                                <GroupBox Header="Output" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="459" Margin="0,4,0,0"/>
-                                <Button x:Name="ManagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,97,141,-31"/>
+                                <GroupBox Header="Output" HorizontalAlignment="Left" Width="459" Margin="0,4,0,0" Height="89" VerticalAlignment="Top"/>
+                                <Button x:Name="ManagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,101,141,-34"/>
                             </Grid>
                         </StackPanel>
                     </StackPanel>
