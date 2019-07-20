@@ -6,6 +6,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jollypop_Injector"
         mc:Ignorable="d"
-        Title="Jollypop Injector" Height="450" Width="800">
-    <Grid/>
+        Title="Jollypop Injector" Height="300.333" Width="510.5">
+    <DockPanel LastChildFill="False">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File" x:Name="menuFileDropdown">
+                <MenuItem x:Name="UpdateBtn" Header="Update" IsCheckable="False"/>
+                <MenuItem x:Name="ExitBtn" Header="Exit" IsCheckable="False"/>
+            </MenuItem>
+            <MenuItem Header="About" x:Name="menuAboutDropdown">
+                <MenuItem x:Name="GithubBtn" Header="Github" IsCheckable="False"/>
+                <MenuItem x:Name="RedditBtn" Header="Reddit" IsCheckable="False"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Orientation="Vertical" Width="Auto">
+            <TabControl Height="240" Width="502">
+                <TabItem Header="Unmanaged">
+                    <!-- Unmanaged DLL Injection -->
+                    <StackPanel Height="199">
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <Label Content="Target:" Width="76"/>
+                            <TextBox x:Name="UnmanagedTargetTextBox" TextWrapping="Wrap" Width="391"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <Label Content="DLL Path:" Width="76"/>
+                            <TextBox x:Name="UnmanagedDLLPathTextBox" TextWrapping="Wrap" Width="335" IsReadOnly="True"/>
+                            <Button x:Name="UnmanagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Grid Height="100">
+                            <GroupBox Header="Bitness" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="235" Margin="10,11,0,0">
+                                <Grid>
+                                    <RadioButton GroupName="UnmanagedBitness" Content="32 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,6,0,0"/>
+                                    <RadioButton GroupName="UnmanagedBitness" Content="64 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,30,0,0" RenderTransformOrigin="0.806,-0.278"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="Output" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="235" Margin="250,11,0,0"/>
+                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,105,141,-31"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Managed (Unity)">
+                    <StackPanel>
+                        <!-- Managed DLL Injection -->
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+        </StackPanel>
+    </DockPanel>
 </Controls:MetroWindow>
