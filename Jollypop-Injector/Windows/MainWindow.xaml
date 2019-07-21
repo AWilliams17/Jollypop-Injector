@@ -10,6 +10,7 @@
     
     <Window.Resources>
         <Style x:Key="OutputListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">

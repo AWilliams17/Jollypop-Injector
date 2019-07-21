@@ -78,7 +78,20 @@ namespace Jollypop_Injector
 
         private void ManagedInjectBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                int targetPID = Utils.GetPid(UnmanagedTargetTextBox.Text);
+                string dllLocation = UnmanagedDLLPathTextBox.Text;
+                unmanagedInjector.Inject(targetPID, dllLocation, currentUnmanagedBitness);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ProcessNotFoundException || ex is FileNotFoundException)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
+                else throw;
+            }
         }
 
         private void ManagedDLLPathBtn_Click(object sender, RoutedEventArgs e)
