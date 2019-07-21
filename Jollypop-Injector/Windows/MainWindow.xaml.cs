@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +24,17 @@ namespace Jollypop_Injector
     /// </summary>
     public partial class MainWindow
     {
-        private static UnmanagedInjector unmanagedInjector = new UnmanagedInjector();
-        private static ManagedInjector managedInjector = new ManagedInjector();
+        private static UnmanagedInjector unmanagedInjector;
+        private static ManagedInjector managedInjector;
 
         public MainWindow()
         {
-
             DataContext = this;
             InitializeComponent();
             Closing += MainWindow_Closing;
+
+            string applicationDirectory = Directory.GetCurrentDirectory();
+
 
             // Set up auto scrolling to the last added item in the output list boxes
             // Taken from https://bit.ly/2Gk13a0
@@ -49,7 +52,7 @@ namespace Jollypop_Injector
 
         public ObservableCollection<string> UnmanagedOutputList
         {
-            get { return unmanagedInjector.UnmanagedInjectorOutput; }
+            get { return unmanagedInjector.InjectorOutput; }
         }
 
         private void UnmanagedInjectBtn_Click(object sender, RoutedEventArgs e)

@@ -10,9 +10,9 @@ namespace Jollypop_Injector.Injectors
 {
     abstract class InjectorBase
     {
-        public ObservableCollection<string> InjectorOutput { get; private set; }
-
-        public Process CreateInjectorProcess(string InjectorPath, string InjectorArguments)
+        public ObservableCollection<string> InjectorOutput { get; internal set; }
+        
+        private Process CreateInjectorProcess(string InjectorPath, string InjectorArguments)
         {
             Process injectorProcess = new Process
             {
@@ -29,8 +29,12 @@ namespace Jollypop_Injector.Injectors
             return injectorProcess;
         }
 
-        public void Inject(string InjectorPath, string InjectorArguments)
+
+
+        public void DoInjection(string InjectorPath, string InjectorArguments)
         {
+            InjectorOutput.Clear();
+
             Process injectorProcess = CreateInjectorProcess(InjectorPath, InjectorArguments);
             injectorProcess.Start();
 

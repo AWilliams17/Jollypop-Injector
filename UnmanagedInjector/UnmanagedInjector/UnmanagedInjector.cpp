@@ -22,54 +22,57 @@ int main(int argc, char** argv) {
 	// Two arguments required:
 	// 1: TargetPID
 	// 2: DllLocation
+
+	printf("	-=Jollypop - Unmanaged Injector=-\n");
+
 	if (argc != 3) {
-		std::cout << "Error: Two arguments required - {TargetPID} {DllLocation}";
+		printf("Error: Two arguments required - {TargetPID} {DllLocation}\r\n");
 		return 1;
 	}
 
 	const int TARGET_PID = atoi(argv[1]);
 	const std::string DLL_LOCATION = argv[2];
 
-	std::cout << "Beginning injection on process with PID " << TARGET_PID << " using DLL located at " << DLL_LOCATION << std::endl;
+	printf("Beginning injection on process with PID '%i' using DLL located at '%s'\r\n", TARGET_PID, DLL_LOCATION.c_str());
 
 	size_t dllLen = DLL_LOCATION.length();
 
 	HANDLE injecteeHandle = OpenProcess(PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION
 		| PROCESS_VM_WRITE | PROCESS_VM_READ, FALSE, TARGET_PID);
 
-	std::cout << "Handle for target process opened. Validating..." << std::endl;
+	printf("Handle for target process opened. Validating...");
 
 	if (!validateHandle(injecteeHandle)) {
-		std::cout << "Error: Handle is not valid. Last error code: " << GetLastError() << std::endl;
+		printf("Error: Handle is not valid. Last error code: ");
 		return 1;
 	}
 
-	std::cout << "Target process handle is valid.\r\nAcquiring LoadLibraryA address from kernel32, and allocating space in the target for the DLL..." << std::endl;
+	printf("Target process handle is valid.\r\nAcquiring LoadLibraryA address from kernel32, and allocating space in the target for the DLL...");
 	LPVOID loadLibrary = (LPVOID)GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
 	LPVOID locationToWrite = VirtualAllocEx(injecteeHandle, NULL, dllLen, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
 
 	if (locationToWrite == NULL) {
-		std::cout << "Error: Pointer to allocated space was NULL. Last error code: " << GetLastError() << std::endl;
+		printf("Error: Pointer to allocated space was NULL. Last error code: %i", GetLastError());
 		return 1;
 	}
 
 	if (!WriteProcessMemory(injecteeHandle, locationToWrite, DLL_LOCATION.c_str(), dllLen, 0)) {
-		std::cout << "Error: Failed to write to the target process' memory. Last error code: " << GetLastError() << std::endl;
+		printf("Error: Failed to write to the target process' memory. Last error code: ");
 		return 1;
 	}
 
-	std::cout << "Successful. Creating remote thread on target and executing the payload..." << std::endl;
+	printf("Successful. Creating remote thread on target and executing the payload...");
 	HANDLE remoteThread = CreateRemoteThread(injecteeHandle, NULL, 0, (LPTHREAD_START_ROUTINE)loadLibrary, locationToWrite, 0, NULL);
 
 	if (!validateHandle(remoteThread)) {
-		std::cout << "Error: CreateRemoteThread call failed - Handle is invalid. Last error code: " << GetLastError() << std::endl;
+		printf("Error: CreateRemoteThread call failed - Handle is invalid. Last error code: ");
 		return 1;
 	}
-	std::cout << "Done. Closing handles and ending..." << std::endl;
+	printf("Done. Closing handles and ending...");
 
 	CloseHandle(injecteeHandle);
 	CloseHandle(remoteThread);
 
-	std::cout << "Handles closed. Injection should be successful." << std::endl;
+	printf("Handles closed. Injection should be successful.");
 	return 0;
 }

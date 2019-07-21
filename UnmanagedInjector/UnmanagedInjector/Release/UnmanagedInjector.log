@@ -1,6 +1,7 @@
-﻿  pch.cpp
-  UnmanagedInjector.cpp
+﻿  UnmanagedInjector.cpp
   Generating code
-  All 73 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 63 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   UnmanagedInjector.vcxproj -> D:\Source\Jollypop-Injector\UnmanagedInjector\Release\UnmanagedInjector.exe
