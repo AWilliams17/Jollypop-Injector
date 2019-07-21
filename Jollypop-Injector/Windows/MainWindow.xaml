@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Jollypop Injector" Height="329.333" Width="472.5">
+    
+    <Window.Resources>
+        <Style x:Key="OutputListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="_Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="_Border" Property="Background" Value="Black"/>
+                                <Setter Property="Foreground" Value="#FF22FC00"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <DockPanel LastChildFill="False">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File" x:Name="menuFileDropdown">
@@ -39,12 +62,21 @@
                                 </Grid>
                             </GroupBox>
                             <GroupBox Header="Output" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="355" Margin="102,11,0,-24">
-                                <ListBox x:Name="UnmanagedOutput" Foreground="LawnGreen" Background="Black" HorizontalAlignment="Left" Height="86" Margin="-4" VerticalAlignment="Top" Width="353"/>
+                                <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource OutputListBoxItemStyle}" Background="Black" Foreground="#FF22FC00" x:Name="UnmanagedOutput" HorizontalAlignment="Left" Height="86" Margin="-4" VerticalAlignment="Top" Width="353" ItemsSource="{Binding UnmanagedOutputList, UpdateSourceTrigger=PropertyChanged}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <DockPanel>
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}"/>
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </GroupBox>
-                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,129,141,-55" Click="UnmanagedInjectBtn_Click"/>
+                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,131,141,-57" Click="UnmanagedInjectBtn_Click"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
+
                 <TabItem Header="Managed (Unity)">
                     <StackPanel>
                         <!-- Managed DLL Injection -->
@@ -67,16 +99,23 @@
                                 <Button x:Name="ManagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top" Click="ManagedDLLPathBtn_Click"/>
                             </StackPanel>
                             <Grid Height="93">
-                                <GroupBox Header="Output" HorizontalAlignment="Left" Width="451" Margin="5,3,0,0" Height="90" VerticalAlignment="Top">
-                                    <ListBox x:Name="ManagedOutput" Foreground="LawnGreen" Background="Black" HorizontalAlignment="Left" Height="63" Margin="-4" VerticalAlignment="Top" Width="449"/>
+                                <GroupBox Header="Output" HorizontalAlignment="Left" Width="451" Margin="5,10,0,0" Height="83" VerticalAlignment="Top">
+                                    <ListBox ItemContainerStyle="{DynamicResource OutputListBoxItemStyle}" Background="Black" Foreground="#FF22FC00" x:Name="ManagedOutput" HorizontalAlignment="Left" Height="56" Margin="-4" VerticalAlignment="Top" Width="449" ItemsSource="{Binding UnmanagedOutputList, UpdateSourceTrigger=PropertyChanged}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <DockPanel>
+                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}"/>
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
                                 </GroupBox>
-                                <Button x:Name="ManagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,98,141,-31" Click="ManagedInjectBtn_Click"/>
+                                <Button x:Name="ManagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,100,141,-33" Click="ManagedInjectBtn_Click"/>
                             </Grid>
                         </StackPanel>
                     </StackPanel>
                 </TabItem>
             </TabControl>
-
         </StackPanel>
     </DockPanel>
 </Controls:MetroWindow>
