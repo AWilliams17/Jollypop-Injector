@@ -4,26 +4,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Jollypop_Injector"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Jollypop Injector" Height="329.333" Width="472.5">
     <DockPanel LastChildFill="False">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File" x:Name="menuFileDropdown">
-                <MenuItem x:Name="UpdateBtn" Header="Update" IsCheckable="False"/>
-                <MenuItem x:Name="ExitBtn" Header="Exit" IsCheckable="False"/>
+                <MenuItem x:Name="UpdateBtn" Header="Update" IsCheckable="False" Click="UpdateBtn_Click"/>
+                <MenuItem x:Name="ExitBtn" Header="Exit" IsCheckable="False" Click="ExitBtn_Click"/>
             </MenuItem>
             <MenuItem Header="About" x:Name="menuAboutDropdown">
-                <MenuItem x:Name="GithubBtn" Header="Github" IsCheckable="False"/>
-                <MenuItem x:Name="RedditBtn" Header="Reddit" IsCheckable="False"/>
+                <MenuItem x:Name="GithubBtn" Header="Github" IsCheckable="False" Click="GithubBtn_Click"/>
             </MenuItem>
         </Menu>
         <StackPanel Orientation="Vertical" Width="Auto">
             <TabControl Height="270" Width="502">
                 <TabItem Header="Unmanaged">
                     <!-- Unmanaged DLL Injection -->
-                    <StackPanel Height="199">
+                    <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                             <Label Content="Target:" Width="76"/>
                             <TextBox x:Name="UnmanagedTargetTextBox" TextWrapping="Wrap" Width="384"/>
@@ -31,17 +29,19 @@
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                             <Label Content="DLL Path:" Width="76"/>
                             <TextBox x:Name="UnmanagedDLLPathTextBox" TextWrapping="Wrap" Width="328" IsReadOnly="True"/>
-                            <Button x:Name="UnmanagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top"/>
+                            <Button x:Name="UnmanagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top" Click="UnmanagedDLLPathBtn_Click"/>
                         </StackPanel>
                         <Grid Height="100">
-                            <GroupBox Header="Bitness" HorizontalAlignment="Left" Height="99" VerticalAlignment="Top" Width="100" Margin="0,11,0,-10">
+                            <GroupBox Header="Bitness" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="94" Margin="3,11,0,-24">
                                 <Grid>
-                                    <RadioButton GroupName="UnmanagedBitness" Content="32 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,6,0,0"/>
-                                    <RadioButton GroupName="UnmanagedBitness" Content="64 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,30,0,0" RenderTransformOrigin="0.806,-0.278"/>
+                                    <RadioButton GroupName="UnmanagedBitness" Content="32 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,15,0,0"/>
+                                    <RadioButton GroupName="UnmanagedBitness" Content="64 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,39,0,0" RenderTransformOrigin="0.806,-0.278"/>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox Header="Output" HorizontalAlignment="Left" Height="99" VerticalAlignment="Top" Width="354" Margin="105,11,0,-10"/>
-                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,119,141,-45"/>
+                            <GroupBox Header="Output" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="355" Margin="102,11,0,-24">
+                                <ListBox x:Name="UnmanagedOutput" Foreground="LawnGreen" Background="Black" HorizontalAlignment="Left" Height="86" Margin="-4" VerticalAlignment="Top" Width="353"/>
+                            </GroupBox>
+                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,129,141,-55" Click="UnmanagedInjectBtn_Click"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
@@ -64,11 +64,13 @@
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="DLL Path:" Width="76"/>
                                 <TextBox x:Name="ManagedDLLPathTextBox" TextWrapping="Wrap" Width="326" IsReadOnly="True"/>
-                                <Button x:Name="ManagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top"/>
+                                <Button x:Name="ManagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top" Click="ManagedDLLPathBtn_Click"/>
                             </StackPanel>
                             <Grid Height="93">
-                                <GroupBox Header="Output" HorizontalAlignment="Left" Width="459" Margin="0,4,0,0" Height="89" VerticalAlignment="Top"/>
-                                <Button x:Name="ManagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,101,141,-34"/>
+                                <GroupBox Header="Output" HorizontalAlignment="Left" Width="451" Margin="5,3,0,0" Height="90" VerticalAlignment="Top">
+                                    <ListBox x:Name="ManagedOutput" Foreground="LawnGreen" Background="Black" HorizontalAlignment="Left" Height="63" Margin="-4" VerticalAlignment="Top" Width="449"/>
+                                </GroupBox>
+                                <Button x:Name="ManagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,98,141,-31" Click="ManagedInjectBtn_Click"/>
                             </Grid>
                         </StackPanel>
                     </StackPanel>

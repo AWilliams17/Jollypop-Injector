@@ -24,5 +24,40 @@ namespace Jollypop_Injector
         {
             InitializeComponent();
         }
+
+        private void UnmanagedInjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ManagedInjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ManagedDLLPathBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UnmanagedDLLPathBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GithubBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
