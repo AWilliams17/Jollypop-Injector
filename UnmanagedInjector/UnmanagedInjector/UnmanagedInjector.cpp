@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	printf("Target process handle is valid.\r\nAcquiring LoadLibraryA address from kernel32, and allocating space in the target for the DLL...");
+	printf("Target process handle is valid. Acquiring LoadLibraryA address from kernel32, and allocating space in the target for the DLL...");
 	LPVOID loadLibrary = (LPVOID)GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
 	LPVOID locationToWrite = VirtualAllocEx(injecteeHandle, NULL, dllLen, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
 

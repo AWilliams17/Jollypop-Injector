@@ -47,18 +47,18 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                             <Label Content="Target:" Width="76"/>
-                            <TextBox x:Name="UnmanagedTargetTextBox" TextWrapping="Wrap" Width="384"/>
+                            <TextBox x:Name="UnmanagedTargetTextBox" TextWrapping="NoWrap" Width="384"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                             <Label Content="DLL Path:" Width="76"/>
-                            <TextBox x:Name="UnmanagedDLLPathTextBox" TextWrapping="Wrap" Width="328" IsReadOnly="True"/>
+                            <TextBox x:Name="UnmanagedDLLPathTextBox" TextWrapping="NoWrap" Width="328" IsReadOnly="True"/>
                             <Button x:Name="UnmanagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top" Click="UnmanagedDLLPathBtn_Click"/>
                         </StackPanel>
                         <Grid Height="100">
                             <GroupBox Header="Bitness" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="94" Margin="3,11,0,-24">
                                 <Grid>
-                                    <RadioButton GroupName="UnmanagedBitness" Content="32 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,15,0,0"/>
-                                    <RadioButton GroupName="UnmanagedBitness" Content="64 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,39,0,0" RenderTransformOrigin="0.806,-0.278"/>
+                                    <RadioButton x:Name="Bit32RadioButton" GroupName="UnmanagedBitness" Checked="Bit32RadioButton_Checked" Content="32 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,15,0,0"/>
+                                    <RadioButton x:Name="Bit64RadioButton" GroupName="UnmanagedBitness" Checked="Bit64RadioButton_Checked" Content="64 Bit" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Margin="10,39,0,0" RenderTransformOrigin="0.806,-0.278"/>
                                 </Grid>
                             </GroupBox>
                             <GroupBox Header="Output" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="355" Margin="102,11,0,-24">
@@ -83,19 +83,19 @@
                         <StackPanel Height="199">
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="Target:" Width="76"/>
-                                <TextBox x:Name="ManagedTargetTextBox" TextWrapping="Wrap" Width="150"/>
+                                <TextBox x:Name="ManagedTargetTextBox" TextWrapping="NoWrap" Width="150"/>
                                 <Label Content="Namespace:" Width="85"/>
-                                <TextBox x:Name="NamespaceTextBox" TextWrapping="Wrap" Width="147"/>
+                                <TextBox x:Name="NamespaceTextBox" TextWrapping="NoWrap" Width="147"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="Classname:" Width="76"/>
-                                <TextBox x:Name="ClassnameTextBox" TextWrapping="Wrap" Width="150"/>
+                                <TextBox x:Name="ClassnameTextBox" TextWrapping="NoWrap" Width="150"/>
                                 <Label Content="Methodname:" Width="85"/>
-                                <TextBox x:Name="MethodTextBox" TextWrapping="Wrap" Width="147"/>
+                                <TextBox x:Name="MethodTextBox" TextWrapping="NoWrap" Width="147"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="DLL Path:" Width="76"/>
-                                <TextBox x:Name="ManagedDLLPathTextBox" TextWrapping="Wrap" Width="326" IsReadOnly="True"/>
+                                <TextBox x:Name="ManagedDLLPathTextBox" TextWrapping="NoWrap" Width="326" IsReadOnly="True"/>
                                 <Button x:Name="ManagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top" Click="ManagedDLLPathBtn_Click"/>
                             </StackPanel>
                             <Grid Height="93">
