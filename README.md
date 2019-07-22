@@ -13,7 +13,7 @@ preserved through each application session.
 It also uses [my memory hacking library](https://github.com/AWilliams17/MemTools), [as well as my C# utility library](https://github.com/AWilliams17/SharpUtils).
   
 I didn't really intend for this to be publicly released, so there's some code quality issues, and there's some end user problems...  
-Mainly being that I didn't write an updater for this (since again, personal usage), so unless you manually check and see if any of those libraries  
+Mainly being that I didn't write an updater for this (since again, personal usage), so unless you manually check and see if any of those libraries
 have updated, you'll probably end up using the outdated ones.  
 When I make a new release of this project, I'll include the currently released versions though. That's **if** I make another release,  
 since I kind of was extremely bored making this, and it already does its job.  
