@@ -1,2 +1,2 @@
-## Jollypop Injector - A 32/64 bit Unmanaged and Managed(as in, Unity) DLL Injector
+## Jollypop Injector - A WPF DLL Injector supporting 32/64 bit unmanaged DLL injection, and 64 bit managed(Unity) DLL injection.
 -Readme slated for eventually

@@ -37,8 +37,6 @@ namespace Jollypop_Injector
             // Taken from https://bit.ly/2Gk13a0
             ((INotifyCollectionChanged)UnmanagedOutput.Items).CollectionChanged += OutputList_CollectionChanged;
             ((INotifyCollectionChanged)ManagedOutput.Items).CollectionChanged += OutputList_CollectionChanged;
-            
-
         }
 
         private void LoadSettings()
