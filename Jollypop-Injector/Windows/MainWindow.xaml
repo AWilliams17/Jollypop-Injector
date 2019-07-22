@@ -35,7 +35,6 @@
     <DockPanel LastChildFill="False">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File" x:Name="menuFileDropdown">
-                <MenuItem x:Name="UpdateBtn" Header="Update" IsCheckable="False" Click="UpdateBtn_Click"/>
                 <MenuItem x:Name="ExitBtn" Header="Exit" IsCheckable="False" Click="ExitBtn_Click"/>
             </MenuItem>
             <MenuItem Header="About" x:Name="menuAboutDropdown">

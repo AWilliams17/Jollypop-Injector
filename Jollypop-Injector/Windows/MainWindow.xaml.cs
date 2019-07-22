@@ -25,7 +25,7 @@ namespace Jollypop_Injector
 
         public MainWindow()
         {
-            // DoAdminCheck();
+            DoAdminCheck();
             DataContext = this;
             InitializeComponent();
             Closing += MainWindow_Closing;
