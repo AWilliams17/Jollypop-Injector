@@ -4,11 +4,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:classes="clr-namespace:Jollypop_Injector.Classes"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Jollypop Injector" Height="367.333" Width="472.5">
-
     <Window.Resources>
+        <classes:HasAllTextConverter x:Key="HasAllTextConverter" />
         <Style x:Key="OutputListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Template">
@@ -73,7 +74,14 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </GroupBox>
-                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,154,141,-80" Click="UnmanagedInjectBtn_Click"/>
+                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,154,141,-80" Click="UnmanagedInjectBtn_Click">
+                                <Button.IsEnabled>
+                                    <MultiBinding Converter="{StaticResource HasAllTextConverter}">
+                                        <Binding ElementName="UnmanagedTargetTextBox" Path="Text" />
+                                        <Binding ElementName="UnmanagedDLLPathTextBox" Path="Text" />
+                                    </MultiBinding>
+                                </Button.IsEnabled>
+                            </Button>
                         </Grid>
                     </StackPanel>
                 </TabItem>
@@ -86,13 +94,13 @@
                                 <Label Content="Target:" Width="76"/>
                                 <TextBox x:Name="ManagedTargetTextBox" TextWrapping="NoWrap" Width="150"/>
                                 <Label Content="Namespace:" Width="85"/>
-                                <TextBox x:Name="NamespaceTextBox" TextWrapping="NoWrap" Width="147"/>
+                                <TextBox x:Name="ManagedNamespaceTextBox" TextWrapping="NoWrap" Width="147"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="Classname:" Width="76"/>
-                                <TextBox x:Name="ClassnameTextBox" TextWrapping="NoWrap" Width="150"/>
+                                <TextBox x:Name="ManagedClassnameTextBox" TextWrapping="NoWrap" Width="150"/>
                                 <Label Content="Methodname:" Width="85"/>
-                                <TextBox x:Name="MethodnameTextBox" TextWrapping="NoWrap" Width="147"/>
+                                <TextBox x:Name="ManagedMethodnameTextBox" TextWrapping="NoWrap" Width="147"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="DLL Path:" Width="76"/>

@@ -40,6 +40,9 @@ namespace Jollypop_Injector.Injectors
         {
             string injectorArguments = $"{TargetPID} {DllLocation}";
 
+            if (!File.Exists(DllLocation))
+                throw new FileNotFoundException("The payload DLL was not found at the target location.");
+
             if (!(File.Exists(_injector32BitPath) && File.Exists(_injector64BitPath)))
                 throw new FileNotFoundException("One or both of the unmanaged injectors are missing. " +
                     "Please ensure they are in the same folder as this application. Unmanaged injection attempts will fail until they are.");

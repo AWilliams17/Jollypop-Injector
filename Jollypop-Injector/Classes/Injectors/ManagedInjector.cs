@@ -31,7 +31,14 @@ namespace Jollypop_Injector.Injectors
 
         public void Inject(string TargetName, string DllLocation, string NameSpace, string ClassName, string MethodName)
         {
+            // Since MonoJabber requires the target to end with .exe
+            if (!TargetName.EndsWith(".exe"))
+                TargetName = $"{TargetName}.exe";
+
             string injectorArguments = $"{TargetName} {DllLocation} {NameSpace} {ClassName} {MethodName}";
+
+            if (!File.Exists(DllLocation))
+                throw new FileNotFoundException("The payload DLL was not found at the target location.");
 
             if (!(File.Exists(_monoJabberPath) && File.Exists(_monoLoaderDLLPath) && File.Exists(_memToolsDLLPath)))
                 throw new FileNotFoundException("Either MonoJabber.exe, MonoLoaderDLL.dll, or MemTools.dll are missing." +

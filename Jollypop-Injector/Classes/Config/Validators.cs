@@ -1,13 +1,28 @@
-﻿using System;
+﻿using Registrar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jollypop_Injector.Config
+namespace Jollypop_Injector.ConfigValidators
 {
-    class Validators
+    public class Validators
     {
+        class BitnessValidatorClass : IValidator
+        {
+            public string Description()
+            {
+                return "Must be 0(32 bit) or 1(64 bit).";
+            }
 
+            public bool Validate(object value)
+            {
+                int convertedValue = ValidatorConverters.ValidatorIntConverter(value);
+                return (convertedValue == 0 || convertedValue == 1);
+            }
+        }
+
+        public IValidator BitnessValidator = new BitnessValidatorClass();
     }
 }
