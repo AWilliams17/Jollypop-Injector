@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 	HANDLE injecteeHandle = OpenProcess(PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION
 		| PROCESS_VM_WRITE | PROCESS_VM_READ, FALSE, TARGET_PID);
 
-	printf("Handle for target process opened. Validating...");
+	printf("Handle for target process opened. Validating...\r\n");
 
 	if (!validateHandle(injecteeHandle)) {
 		printf("Error: Handle is not valid. Last error code: ");

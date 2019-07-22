@@ -6,8 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Jollypop Injector" Height="329.333" Width="472.5">
-    
+        Title="Jollypop Injector" Height="367.333" Width="472.5">
+
     <Window.Resources>
         <Style x:Key="OutputListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="FontSize" Value="12"/>
@@ -30,7 +30,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
     <DockPanel LastChildFill="False">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File" x:Name="menuFileDropdown">
@@ -42,7 +42,7 @@
             </MenuItem>
         </Menu>
         <StackPanel Orientation="Vertical" Width="Auto">
-            <TabControl Height="270" Width="502">
+            <TabControl Height="320" Width="502">
                 <TabItem Header="Unmanaged">
                     <!-- Unmanaged DLL Injection -->
                     <StackPanel>
@@ -73,7 +73,7 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </GroupBox>
-                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,131,141,-57" Click="UnmanagedInjectBtn_Click"/>
+                            <Button x:Name="UnmanagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,154,141,-80" Click="UnmanagedInjectBtn_Click"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
@@ -92,7 +92,7 @@
                                 <Label Content="Classname:" Width="76"/>
                                 <TextBox x:Name="ClassnameTextBox" TextWrapping="NoWrap" Width="150"/>
                                 <Label Content="Methodname:" Width="85"/>
-                                <TextBox x:Name="MethodTextBox" TextWrapping="NoWrap" Width="147"/>
+                                <TextBox x:Name="MethodnameTextBox" TextWrapping="NoWrap" Width="147"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="DLL Path:" Width="76"/>
@@ -100,8 +100,8 @@
                                 <Button x:Name="ManagedDLLPathBtn" Content="..." Width="56" Height="26" VerticalAlignment="Top" Click="ManagedDLLPathBtn_Click"/>
                             </StackPanel>
                             <Grid Height="93">
-                                <GroupBox Header="Output" HorizontalAlignment="Left" Width="451" Margin="5,10,0,0" Height="83" VerticalAlignment="Top">
-                                    <ListBox ItemContainerStyle="{DynamicResource OutputListBoxItemStyle}" Background="Black" Foreground="#FF22FC00" x:Name="ManagedOutput" HorizontalAlignment="Left" Height="56" Margin="-4" VerticalAlignment="Top" Width="449" ItemsSource="{Binding UnmanagedOutputList, UpdateSourceTrigger=PropertyChanged}">
+                                <GroupBox Header="Output" HorizontalAlignment="Left" Width="451" Margin="5,10,0,-25" Height="108" VerticalAlignment="Top">
+                                    <ListBox ItemContainerStyle="{DynamicResource OutputListBoxItemStyle}" Background="Black" Foreground="#FF22FC00" x:Name="ManagedOutput" HorizontalAlignment="Left" Height="86" Margin="-4" VerticalAlignment="Top" Width="449" ItemsSource="{Binding ManagedOutputList, UpdateSourceTrigger=PropertyChanged}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <DockPanel>
@@ -111,7 +111,7 @@
                                         </ListBox.ItemTemplate>
                                     </ListBox>
                                 </GroupBox>
-                                <Button x:Name="ManagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,100,141,-33" Click="ManagedInjectBtn_Click"/>
+                                <Button x:Name="ManagedInjectBtn" Content="Inject" Height="26" VerticalAlignment="Top" Margin="141,123,141,-56" Click="ManagedInjectBtn_Click"/>
                             </Grid>
                         </StackPanel>
                     </StackPanel>

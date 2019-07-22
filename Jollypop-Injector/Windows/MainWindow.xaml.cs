@@ -58,6 +58,11 @@ namespace Jollypop_Injector
             get { return unmanagedInjector.InjectorOutput; }
         }
 
+        public ObservableCollection<string> ManagedOutputList
+        {
+            get { return managedInjector.InjectorOutput; }
+        }
+
         private void UnmanagedInjectBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -80,23 +85,24 @@ namespace Jollypop_Injector
         {
             try
             {
-                int targetPID = Utils.GetPid(UnmanagedTargetTextBox.Text);
-                string dllLocation = UnmanagedDLLPathTextBox.Text;
-                unmanagedInjector.Inject(targetPID, dllLocation, currentUnmanagedBitness);
+                string targetName = ManagedTargetTextBox.Text;
+                string dllLocation = ManagedDLLPathTextBox.Text;
+                string nameSpace = NamespaceTextBox.Text;
+                string className = ClassnameTextBox.Text;
+                string methodName = MethodnameTextBox.Text;
+                managedInjector.Inject(targetName, dllLocation, nameSpace, className, methodName);
             }
-            catch (Exception ex)
+            catch (FileNotFoundException ex)
             {
-                if (ex is ProcessNotFoundException || ex is FileNotFoundException)
-                {
-                    MessageBox.Show(ex.Message, "Error");
-                }
-                else throw;
+                MessageBox.Show(ex.Message, "Error");
             }
         }
 
         private void ManagedDLLPathBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            string[] dllPath = SharpUtils.FileUtils.DialogHelpers.SelectFilesDialog("Payload DLL File", "DLL files (*.dll)|*.dll", false);
+            if (dllPath.Length != 0)
+                ManagedDLLPathTextBox.Text = dllPath[0];
         }
 
         private void UnmanagedDLLPathBtn_Click(object sender, RoutedEventArgs e)

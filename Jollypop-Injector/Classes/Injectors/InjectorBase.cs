@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 
 namespace Jollypop_Injector.Injectors
 {
@@ -29,15 +30,12 @@ namespace Jollypop_Injector.Injectors
             return injectorProcess;
         }
 
-
-
         public void DoInjection(string InjectorPath, string InjectorArguments)
         {
             InjectorOutput.Clear();
 
             Process injectorProcess = CreateInjectorProcess(InjectorPath, InjectorArguments);
             injectorProcess.Start();
-
             while (!injectorProcess.StandardOutput.EndOfStream)
             {
                 string outputLine = injectorProcess.StandardOutput.ReadLine();
