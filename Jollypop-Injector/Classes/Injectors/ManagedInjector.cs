@@ -35,7 +35,7 @@ namespace Jollypop_Injector.Injectors
                 throw new FileNotFoundException("The payload DLL was not found at the target location.");
 
             if (!(File.Exists(_monoJabberPath) && File.Exists(_monoLoaderDLLPath) && File.Exists(_memToolsDLLPath)))
-                throw new FileNotFoundException("Either MonoJabber.exe, MonoLoaderDLL.dll, or MemTools.dll are missing." +
+                throw new FileNotFoundException("Either MonoJabber.exe, MonoLoaderDLL.dll, or MemTools.dll are missing. " +
                     "Please ensure they are in the same folder as this application. Managed injection attempts will fail until they are.");
 
             DoInjection(_monoJabberPath, injectorArguments);

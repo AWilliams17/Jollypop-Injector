@@ -108,7 +108,7 @@
                             </StackPanel>
                             <Grid Height="93">
                                 <GroupBox Header="Output" HorizontalAlignment="Left" Width="451" Margin="5,10,0,-25" Height="108" VerticalAlignment="Top">
-                                    <ListBox ItemContainerStyle="{DynamicResource OutputListBoxItemStyle}" Background="Black" Foreground="#FF22FC00" x:Name="ManagedOutput" HorizontalAlignment="Left" Height="86" Margin="-4" VerticalAlignment="Top" Width="449" ItemsSource="{Binding ManagedOutputList, UpdateSourceTrigger=PropertyChanged}">
+                                    <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource OutputListBoxItemStyle}" Background="Black" Foreground="#FF22FC00" x:Name="ManagedOutput" HorizontalAlignment="Left" Height="86" Margin="-4" VerticalAlignment="Top" Width="449" ItemsSource="{Binding ManagedOutputList, UpdateSourceTrigger=PropertyChanged}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <DockPanel>
