@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Jollypop_Injector.Classes
 {
-    // Taken from https://www.codeproject.com/Questions/1101746/Need-to-enable-the-button-when-all-textbox-has-val
+    // Taken from https://bit.ly/2Z2MIpD
     public class HasAllTextConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)

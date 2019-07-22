@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Jollypop_Injector.Injectors
 {
@@ -45,7 +39,6 @@ namespace Jollypop_Injector.Injectors
                     "Please ensure they are in the same folder as this application. Managed injection attempts will fail until they are.");
 
             DoInjection(_monoJabberPath, injectorArguments);
-
         }
     }
 }
