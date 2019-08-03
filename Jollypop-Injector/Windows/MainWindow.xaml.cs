@@ -25,6 +25,7 @@ namespace Jollypop_Injector
 
         public MainWindow()
         {
+            DoMultipleInstanceCheck();
             DoAdminWarning();
             DataContext = this;
             InitializeComponent();
@@ -73,6 +74,15 @@ namespace Jollypop_Injector
             ManagedNamespaceTextBox.Text = config.Settings.GetOption<string>("ManagedNamespace");
             ManagedClassnameTextBox.Text = config.Settings.GetOption<string>("ManagedClassname");
             ManagedMethodnameTextBox.Text = config.Settings.GetOption<string>("ManagedMethodname");
+        }
+
+        private void DoMultipleInstanceCheck()
+        {
+            if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
+            {
+                MessageBox.Show("Error: Jollypop Injector is already running. Only one instance may be open at a time.", "Application is already running");
+                Application.Current.Shutdown();
+            }
         }
 
         private void DoAdminWarning()
