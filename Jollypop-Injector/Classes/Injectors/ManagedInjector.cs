@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.IO.Pipes;
 
 namespace Jollypop_Injector.Injectors
 {
@@ -39,6 +40,7 @@ namespace Jollypop_Injector.Injectors
                     "Please ensure they are in the same folder as this application. Managed injection attempts will fail until they are.");
 
             DoInjection(_monoJabberPath, injectorArguments);
+
         }
     }
 }
