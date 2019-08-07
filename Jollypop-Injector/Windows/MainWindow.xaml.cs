@@ -25,8 +25,7 @@ namespace Jollypop_Injector
 
         public MainWindow()
         {
-            DoMultipleInstanceCheck();
-            DoAdminWarning();
+            DoAdminCheck();
             DataContext = this;
             InitializeComponent();
             Closing += MainWindow_Closing;
@@ -76,22 +75,13 @@ namespace Jollypop_Injector
             ManagedMethodnameTextBox.Text = config.Settings.GetOption<string>("ManagedMethodname");
         }
 
-        private void DoMultipleInstanceCheck()
+        private void DoAdminCheck()
         {
-            if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
-            {
-                MessageBox.Show("Error: Jollypop Injector is already running. Only one instance may be open at a time.", "Application is already running");
-                Application.Current.Shutdown();
-            }
-        }
-
-        private void DoAdminWarning()
-        {
-            if (AdminCheckHelper.IsRunningAsAdmin())
+            if (!AdminCheckHelper.IsRunningAsAdmin())
             {
                 System.Media.SystemSounds.Hand.Play();
-                MessageBox.Show("You are running this application as an admin - Please note that bugs seem to occur " +
-                    "if the injector is run as admin, but the target is not. I recommend running as a normal user.", "Admin Warning");
+                MessageBox.Show("This application requires you to run it as an administrator to work properly. " +
+                    "Please re-run as administrator.", "Not Admin!");
                 Application.Current.Shutdown();
             }
         }
