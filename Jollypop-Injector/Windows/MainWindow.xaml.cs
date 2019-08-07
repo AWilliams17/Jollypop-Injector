@@ -35,8 +35,19 @@ namespace Jollypop_Injector
             SetManagedFields();
             // Set up auto scrolling to the last added item in the output list boxes
             // Taken from https://bit.ly/2Gk13a0
-            ((INotifyCollectionChanged)UnmanagedOutput.Items).CollectionChanged += OutputList_CollectionChanged;
-            ((INotifyCollectionChanged)ManagedOutput.Items).CollectionChanged += OutputList_CollectionChanged;
+            ((INotifyCollectionChanged)UnmanagedOutput.Items).CollectionChanged += UnmanagedOutput_CollectionChanged;
+            ((INotifyCollectionChanged)ManagedOutput.Items).CollectionChanged += ManagedOutput_CollectionChanged;
+        }
+
+        private void DoAdminCheck()
+        {
+            if (!AdminCheckHelper.IsRunningAsAdmin())
+            {
+                System.Media.SystemSounds.Hand.Play();
+                MessageBox.Show("This application requires you to run it as an administrator to work properly. " +
+                    "Please re-run as administrator.", "Not Admin!");
+                Application.Current.Shutdown();
+            }
         }
 
         private void LoadSettings()
@@ -58,6 +69,19 @@ namespace Jollypop_Injector
             }
         }
 
+        private void SaveAllSettings()
+        {
+            config.Settings.SetOption("UnmanagedBitness", (int)currentUnmanagedBitness);
+            config.Settings.SetOption("UnmanagedTarget", UnmanagedTargetTextBox.Text);
+            config.Settings.SetOption("UnmanagedDLLPath", UnmanagedDLLPathTextBox.Text);
+            config.Settings.SetOption("ManagedTarget", ManagedTargetTextBox.Text);
+            config.Settings.SetOption("ManagedDLLPath", ManagedDLLPathTextBox.Text);
+            config.Settings.SetOption("ManagedNamespace", ManagedNamespaceTextBox.Text);
+            config.Settings.SetOption("ManagedClassname", ManagedClassnameTextBox.Text);
+            config.Settings.SetOption("ManagedMethodname", ManagedMethodnameTextBox.Text);
+            config.Settings.SaveSettings();
+        }
+
         private void SetUnmanagedFields()
         {
             Bit32RadioButton.IsChecked = (currentUnmanagedBitness == Bitness.BIT_32);
@@ -75,33 +99,10 @@ namespace Jollypop_Injector
             ManagedMethodnameTextBox.Text = config.Settings.GetOption<string>("ManagedMethodname");
         }
 
-        private void DoAdminCheck()
+        private void MainWindow_Closing(object sender, EventArgs e)
         {
-            if (!AdminCheckHelper.IsRunningAsAdmin())
-            {
-                System.Media.SystemSounds.Hand.Play();
-                MessageBox.Show("This application requires you to run it as an administrator to work properly. " +
-                    "Please re-run as administrator.", "Not Admin!");
-                Application.Current.Shutdown();
-            }
-        }
-
-        private void OutputList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                UnmanagedOutput.ScrollIntoView(e.NewItems[0]);
-            }
-        }
-
-        public ObservableCollection<string> UnmanagedOutputList
-        {
-            get { return unmanagedInjector.InjectorOutput; }
-        }
-
-        public ObservableCollection<string> ManagedOutputList
-        {
-            get { return managedInjector.InjectorOutput; }
+            SaveAllSettings();
+            Application.Current.Shutdown();
         }
 
         private void UnmanagedInjectBtn_Click(object sender, RoutedEventArgs e)
@@ -173,23 +174,30 @@ namespace Jollypop_Injector
             currentUnmanagedBitness = Bitness.BIT_64;
         }
 
-        private void MainWindow_Closing(object sender, EventArgs e)
+        private void UnmanagedOutput_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            SaveAllSettings();
-            Application.Current.Shutdown();
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                UnmanagedOutput.ScrollIntoView(e.NewItems[0]);
+            }
         }
 
-        private void SaveAllSettings()
+        private void ManagedOutput_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            config.Settings.SetOption("UnmanagedBitness", (int)currentUnmanagedBitness);
-            config.Settings.SetOption("UnmanagedTarget", UnmanagedTargetTextBox.Text);
-            config.Settings.SetOption("UnmanagedDLLPath", UnmanagedDLLPathTextBox.Text);
-            config.Settings.SetOption("ManagedTarget", ManagedTargetTextBox.Text);
-            config.Settings.SetOption("ManagedDLLPath", ManagedDLLPathTextBox.Text);
-            config.Settings.SetOption("ManagedNamespace", ManagedNamespaceTextBox.Text);
-            config.Settings.SetOption("ManagedClassname", ManagedClassnameTextBox.Text);
-            config.Settings.SetOption("ManagedMethodname", ManagedMethodnameTextBox.Text);
-            config.Settings.SaveSettings();
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                ManagedOutput.ScrollIntoView(e.NewItems[0]);
+            }
+        }
+
+        public ObservableCollection<string> UnmanagedOutputList
+        {
+            get { return unmanagedInjector.InjectorOutput; }
+        }
+
+        public ObservableCollection<string> ManagedOutputList
+        {
+            get { return managedInjector.InjectorOutput; }
         }
     }
 }
